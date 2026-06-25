@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackout Hot Yoga</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom utility to show/hide pages based on the web address hash */
+    .page-section { display: none; }
+    #home:target, #about:target, #wellbeing:target, #contact:target { display: block; }
+    /* Default fallback to show home page when no tab is selected */
+    #home { display: block; }
+    :target ~ #home { display: none; }
+  </style>
 </head>
 <body class="bg-black text-zinc-100 font-sans antialiased selection:bg-[#ff3c00] selection:text-white flex flex-col justify-between min-h-screen overflow-x-hidden relative">
 
@@ -13,7 +21,7 @@
 
   <header class="border-b border-zinc-900 sticky top-0 bg-black/80 backdrop-blur-md z-50">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
+      <a href="#home" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
         <div class="w-9 h-9 border border-zinc-800 rounded-lg flex items-center justify-center bg-zinc-950">
           <span class="font-bold text-white text-xs tracking-wider">B</span>
         </div>
@@ -21,71 +29,95 @@
           <h1 class="text-sm font-bold tracking-[0.2em] text-white uppercase leading-none">Blackout</h1>
           <p class="text-[9px] tracking-[0.3em] text-zinc-500 uppercase mt-1">Hot Yoga</p>
         </div>
-      </div>
+      </a>
 
-      <div class="flex space-x-5 py-2.5 border border-[#ff3c00] text-[#ff3c00] rounded px-4 text-[11px] uppercase tracking-wider font-semibold">
-        Pure Infrared Radiant Heat
-      </div>
+      <nav class="flex space-x-6 text-xs uppercase tracking-widest font-medium">
+        <a href="#home" class="text-zinc-400 hover:text-[#ff3c00] transition-colors">Home</a>
+        <a href="#about" class="text-zinc-400 hover:text-[#ff3c00] transition-colors">About</a>
+        <a href="#wellbeing" class="text-zinc-400 hover:text-[#ff3c00] transition-colors">Wellbeing</a>
+        <a href="#contact" class="text-zinc-400 hover:text-[#ff3c00] transition-colors">Contact</a>
+      </nav>
+
+      <a href="#contact" class="px-4 py-2 border border-[#ff3c00] text-[#ff3c00] rounded tracts-[11px] uppercase tracking-wider font-semibold hover:bg-[#ff3c00] hover:text-white transition-all">
+        Reserve Pass
+      </a>
     </div>
   </header>
 
-  <main class="flex-grow z-10 max-w-5xl mx-auto w-full px-6 mt-12 space-y-20">
-    
-    <section class="text-center space-y-6 pt-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-[10px] uppercase tracking-wider text-zinc-400">
-        <span class="w-1.5 h-1.5 bg-[#ff3c00] rounded-full animate-pulse"></span>
-        Studio Environment Configured
-      </div>
-      <h1 class="text-5xl sm:text-7xl font-black tracking-tight uppercase text-white leading-tight">
-        Strength <span className="text-zinc-700">·</span> Balance <br/>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-[#ff3c00]">Flexibility</span>
-      </h1>
-      <p class="max-w-xl mx-auto text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
-        A premium sensory deprivation hot yoga experience. Heated natively to deep cellular absorption parameters under cutting-edge far-infrared arrays in absolute studio darkness.
-      </p>
-    </section>
+  <main class="flex-grow z-10 max-w-5xl mx-auto w-full px-6 mt-12 mb-20">
 
-    <section class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center shadow-xl">
-      <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Optimum Temperature</p><p class="text-xl font-bold text-white mt-1">104°F / 40°C</p></div>
-      <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Therapeutic Focus</p><p class="text-xl font-bold text-white mt-1">The Triad</p></div>
-      <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Ambient Studio Light</p><p class="text-xl font-bold text-white mt-1">Pure Darkness</p></div>
-      <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Far Infrared Spec</p><p class="text-xl font-bold text-white mt-1">9.4 Microns</p></div>
-    </section>
-
-    <section class="space-y-6 border-t border-zinc-900 pt-12">
-      <div class="text-center">
-        <h2 class="text-lg uppercase tracking-widest font-bold text-white">The Foundational Focus Architecture</h2>
-        <p class="text-xs text-zinc-500 mt-1">Every posture sequence targets three core physiological pillars</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 space-y-3 relative overflow-hidden">
-          <div class="absolute top-0 left-0 h-1 w-full bg-[#ff3c00]"></div>
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider">1. Isometric Strength</h3>
-          <p class="text-xs text-zinc-400 font-light leading-relaxed">Holding prolonged asanas in deep heat triggers intense isometric contractions. This maximizes motor unit recruitment, building absolute core power and muscular endurance.</p>
-          <span class="text-[10px] font-mono text-zinc-500 block pt-2 border-t border-zinc-900">Environment Threshold: 105°F</span>
+    <div id="home" class="page-section space-y-16 animate-fadeIn">
+      <section class="text-center space-y-6 pt-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-[10px] uppercase tracking-wider text-zinc-400">
+          <span class="w-1.5 h-1.5 bg-[#ff3c00] rounded-full animate-pulse"></span>
+          Studio Environment Configured
         </div>
-        <div class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 space-y-3 relative overflow-hidden">
-          <div class="absolute top-0 left-0 h-1 w-full bg-[#ff3c00]"></div>
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider">2. Vestibular Balance</h3>
-          <p class="text-xs text-zinc-400 font-light leading-relaxed">Eliminating visual mirror distractions forces your central nervous system to rely strictly on internal proprioception and total stabilization alignment.</p>
-          <span class="text-[10px] font-mono text-zinc-500 block pt-2 border-t border-zinc-900">Environment Threshold: 102°F</span>
+        <h1 class="text-5xl sm:text-7xl font-black tracking-tight uppercase text-white leading-tight">
+          Strength · Balance <br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-[#ff3c00]">Flexibility</span>
+        </h1>
+        <p class="max-w-xl mx-auto text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+          Welcome to Blackout. A premium sensory deprivation hot yoga experience. Heated natively to deep cellular absorption parameters under cutting-edge far-infrared arrays in absolute studio darkness.
+        </p>
+        <div class="flex justify-center gap-4 pt-2">
+          <a href="#wellbeing" class="px-6 py-3 bg-white text-black text-xs uppercase tracking-widest font-bold rounded hover:bg-zinc-200 transition-colors">Explore Science</a>
+          <a href="#contact" class="px-6 py-3 bg-zinc-900 border border-zinc-800 text-xs uppercase tracking-widest font-bold rounded hover:border-[#ff3c00] transition-colors">Book Intro Class</a>
         </div>
-        <div class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 space-y-3 relative overflow-hidden">
-          <div class="absolute top-0 left-0 h-1 w-full bg-[#ff3c00]"></div>
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider">3. Fascial Flexibility</h3>
-          <p class="text-xs text-zinc-400 font-light leading-relaxed">Far-infrared waves penetrate up to 3 inches deep, increasing the thermal stretch threshold of connective ligaments and tendons safely without joint strain.</p>
-          <span class="text-[10px] font-mono text-zinc-500 block pt-2 border-t border-zinc-900">Environment Threshold: 104°F</span>
+      </section>
+
+      <section class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center shadow-xl">
+        <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Optimum Temperature</p><p class="text-xl font-bold text-white mt-1">104°F / 40°C</p></div>
+        <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Therapeutic Focus</p><p class="text-xl font-bold text-white mt-1">The Triad</p></div>
+        <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Ambient Studio Light</p><p class="text-xl font-bold text-white mt-1">Pure Darkness</p></div>
+        <div><p class="text-[10px] uppercase tracking-widest text-zinc-500">Far Infrared Spec</p><p class="text-xl font-bold text-white mt-1">9.4 Microns</p></div>
+      </section>
+
+      <section class="space-y-6 border-t border-zinc-900 pt-12">
+        <div class="text-center">
+          <h2 class="text-lg uppercase tracking-widest font-bold text-white">The Foundational Focus Architecture</h2>
+          <p class="text-xs text-zinc-500 mt-1">Every posture sequence targets three core physiological pillars</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 space-y-3 relative overflow-hidden">
+            <div class="absolute top-0 left-0 h-1 w-full bg-[#ff3c00]"></div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider">1. Isometric Strength</h3>
+            <p class="text-xs text-zinc-400 font-light leading-relaxed">Holding prolonged asanas in deep heat triggers intense isometric contractions. This maximizes motor unit recruitment, building absolute core power.</p>
+          </div>
+          <div class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 space-y-3 relative overflow-hidden">
+            <div class="absolute top-0 left-0 h-1 w-full bg-[#ff3c00]"></div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider">2. Vestibular Balance</h3>
+            <p class="text-xs text-zinc-400 font-light leading-relaxed">Eliminating visual mirror distractions forces your central nervous system to rely strictly on internal proprioception and total stabilization alignment.</p>
+          </div>
+          <div class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 space-y-3 relative overflow-hidden">
+            <div class="absolute top-0 left-0 h-1 w-full bg-[#ff3c00]"></div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider">3. Fascial Flexibility</h3>
+            <p class="text-xs text-zinc-400 font-light leading-relaxed">Far-infrared waves penetrate up to 3 inches deep, increasing the thermal stretch threshold of connective ligaments safely without joint strain.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="about" class="page-section space-y-8 animate-fadeIn">
+      <div class="max-w-2xl mx-auto text-center space-y-6 pt-4">
+        <span class="text-[10px] uppercase tracking-[0.3em] text-[#ff3c00] font-mono">Sanctuary Blueprint</span>
+        <h2 class="text-3xl font-black uppercase tracking-widest text-white">The Architecture of Sensory Darkness</h2>
+        <p class="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+          Blackout Hot Yoga was engineered to completely eliminate performative fitness distractions. By quietening the visual cortex via complete environmental darkness, your awareness scales away from competitive aesthetics and targets absolute internal focus.
+        </p>
+        <div class="p-6 bg-[#09090b] border border-zinc-900 rounded-xl text-left text-xs text-zinc-400 space-y-4">
+          <p><span class="text-white font-bold block uppercase tracking-wide mb-1">Zero Mirror Pollution</span> Forces physical alignment mapping via your neuro-vestibular metrics rather than superficial visual checking.</p>
+          <p><span class="text-white font-bold block uppercase tracking-wide mb-1">Far-Infrared Spectrum Integration</span> German-engineered heating panel configurations match deep water molecule resonance specs to safely warm tissues from the inside out.</p>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="space-y-6 border-t border-zinc-900 pt-12">
-      <div class="text-center">
-        <h2 class="text-lg uppercase tracking-widest font-bold text-white">The Clinical Science of Hot Yoga</h2>
-        <p class="text-xs text-zinc-500 mt-1">Biochemical pathways activated under far-infrared radiant heat parameters</p>
+    <div id="wellbeing" class="page-section space-y-10 animate-fadeIn">
+      <div class="text-center space-y-2 pt-4">
+        <span class="text-[10px] uppercase tracking-[0.3em] text-[#ff3c00] font-mono">The Physiology Lab</span>
+        <h2 class="text-3xl font-black uppercase text-white tracking-wider">The Clinical Science of Hot Yoga</h2>
+        <p class="text-xs text-zinc-500">Biochemical pathways activated under far-infrared radiant heat parameters</p>
       </div>
-
+      
       <div class="grid sm:grid-cols-2 gap-6">
         <div class="bg-[#09090b] border border-zinc-900 rounded-xl p-6 space-y-2">
           <span class="text-[9px] uppercase tracking-widest text-[#ff3c00] bg-[#ff3c00]/10 px-2.5 py-1 rounded font-mono">Vascular</span>
@@ -108,25 +140,33 @@
           <p class="text-xs text-zinc-400 font-light leading-relaxed">Thermal nervous system activation stimulates sensory pathways, triggering a parasympathetic shift that limits circulating stress compounds.</p>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="max-w-md mx-auto pt-6">
-      <div class="bg-[#09090b] border border-zinc-900 rounded-2xl p-8 space-y-4 text-center">
-        <h3 class="text-base font-bold uppercase tracking-widest text-white">Reserve Sanctuary Pass</h3>
-        <p class="text-[11px] text-zinc-500">Submit your contact info to confirm availability in our upcoming session blocks.</p>
-        <div class="space-y-3 text-left pt-2">
-          <input type="text" placeholder="Full Name" class="w-full px-3 py-2.5 bg-black border border-zinc-800 text-zinc-100 rounded text-xs focus:outline-none focus:border-[#ff3c00]" />
-          <input type="email" placeholder="Email Address" class="w-full px-3 py-2.5 bg-black border border-zinc-800 text-zinc-100 rounded text-xs focus:outline-none focus:border-[#ff3c00]" />
-          <button onclick="alert('Pass Request Logged! Our studio team will email you within 12 hours.')" class="w-full py-3 bg-[#ff3c00] text-white rounded text-xs uppercase tracking-widest font-bold hover:bg-[#e03500] transition-colors mt-1">
-            Request Intro Pass
-          </button>
+    <div id="contact" class="page-section space-y-6 animate-fadeIn">
+      <div class="max-w-md mx-auto pt-4">
+        <div class="bg-[#09090b] border border-zinc-900 rounded-2xl p-8 space-y-4 text-center shadow-2xl">
+          <h3 class="text-lg font-black uppercase tracking-widest text-white">Reserve Sanctuary Pass</h3>
+          <p class="text-[11px] text-zinc-500">Submit your contact info to confirm availability in our upcoming dark-room session blocks.</p>
+          <form class="space-y-4 text-left pt-2" onsubmit="event.preventDefault(); alert('Pass Request Logged! Our studio team will email you details within 12 hours.');">
+            <div>
+              <label class="text-[9px] uppercase tracking-wider text-zinc-500 block mb-1">Full Name</label>
+              <input type="text" required placeholder="Alex Carter" class="w-full px-3 py-2.5 bg-black border border-zinc-800 text-zinc-100 rounded text-xs focus:outline-none focus:border-[#ff3c00]" />
+            </div>
+            <div>
+              <label class="text-[9px] uppercase tracking-wider text-zinc-500 block mb-1">Email Address</label>
+              <input type="email" required placeholder="name@domain.com" class="w-full px-3 py-2.5 bg-black border border-zinc-800 text-zinc-100 rounded text-xs focus:outline-none focus:border-[#ff3c00]" />
+            </div>
+            <button type="submit" class="w-full py-3 bg-[#ff3c00] text-white rounded text-xs uppercase tracking-widest font-bold hover:bg-[#e03500] transition-colors mt-2">
+              Request Intro Pass
+            </button>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
 
   </main>
 
-  <footer class="border-t border-zinc-900 bg-black py-8 text-center text-[10px] text-zinc-600 uppercase tracking-widest mt-16 w-full">
+  <footer class="border-t border-zinc-900 bg-black py-8 text-center text-[10px] text-zinc-600 uppercase tracking-widest w-full">
     © 2026 Blackout Hot Yoga. Encapsulated in absolute therapeutic darkness.
   </footer>
 
