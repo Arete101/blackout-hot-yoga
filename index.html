@@ -1,12 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blackout Hot Yoga</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackout Hot Yoga</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-black text-zinc-100 font-sans antialiased">
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // Grab state hooks directly from the global React window
+    const { useState } = React;
+
+    // Custom inline SVG icons so they render cleanly anywhere
+    const SunIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>;
+    const ActivityIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>;
+    const FlameIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>;
+    const HeartIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>;
+    const ShieldAlertIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6v7z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>;
+    const SparklesIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>;
+
+    function App() {
+      const [activeTab, setActiveTab] = useState('home');
+      const [quizSelection, setQuizSelection] = useState('strength');
+      const [newsletterEmail, setNewsletterEmail] = useState('');
+      const [feedbackMsg, setFeedbackMsg] = useState('');
+      const [contactForm, setContactForm] = useState({ name: '', email: '', experience: 'all', message: '' });
+      const [bookingStatus, setBookingStatus] = useState('');
+
+      const handleNewsletterSubmit = (e) => {
+        e.preventDefault();
+        if (newsletterEmail) {
+          setFeedbackMsg("Your spot near the radiant panels is secured. Welcome to the dark.");
+          setNewsletterEmail('');
+          setTimeout(() => setFeedbackMsg(''), 5000);
+        }
+      };
+
+      const handleContactSubmit = (e) => {
+        e.preventDefault();
+        setBookingStatus("Thermal alignment complete. Our practitioners will reach out within 12 hours.");
+        setTimeout(() => setBookingStatus(''), 6000);
+      };
+
+      const scientificBenefits = [
+        {
+          title: "Vasodilation & Cardiovascular Efficiency",
+          tag: "Vascular",
+          desc: "Practicing in our signature 104°F (40°C) far-infrared heat triggers profound vasodilation. Blood vessels expand, significantly reducing cardiac workload while increasing stroke volume and systemic oxygen transport to oxygen-depleted muscle fibers.",
+          evidence: "Source: Journal of Applied Physiology (Infrared Thermoregulation Studies)"
+        },
+        {
+          title: "Myofascial Plasticity & Elasticity",
+          tag: "Physiological",
+          desc: "High ambient temperature temporarily alters the viscoelastic properties of collagenous tissues. This increases muscle and ligament elasticity, reducing physical resistance during deep extension sequences and lessening the risk of micro-tearing.",
+          evidence: "Source: Clinical Biomechanics (Heat & Collagen Elasticity Research)"
+        },
+        {
+          title: "Detoxification & Heavy Metal Excretion",
+          tag: "Biochemical",
+          desc: "Perspiration induced by radiant infrared heat differs from normal sweat. Studies show a higher concentration of heavy metals (nickel, lead, copper, and arsenic) is excreted via sweat glands during deep-heat exposure compared to physical exercise.",
+          evidence: "Source: Archives of Environmental and Contamination Toxicology"
+        },
+        {
+          title: "Cortisol Suppression & Stress Relief",
+          tag: "Neurological",
+          desc: "Radiant heat triggers the release of Heat Shock Proteins (HSP70) and stimulates sensory nerve fibers, triggering a parasympathetic shift. This downsizes salivary cortisol levels and enhances neural serotonin production.",
+          evidence: "Source: Harvard Medical Health (Thermotherapy & Depressive Disorders)"
+        }
+      ];
+
+      const triadFocus = {
+        strength: {
+          title: "Pure Isometric Strength",
+          subtitle: "Power in the Stillness",
+          description: "Under the deep infrared panels, muscles are warmed quickly to their optimal operating range. Holding prolonged asanas in high heat triggers intense isometric contractions. This maximizes motor unit recruitment, building absolute core power, shoulder stabilization, and lower body muscular endurance.",
+          temperature: "105°F / 41°C",
+          humidity: "40% RH",
+          intensity: "High (Level 4/5)",
+          pose: "Warrior III to Crescent Lunge Holds"
+        },
+        balance: {
+          title: "Vestibular & Core Alignment",
+          subtitle: "Center of Gravity in the Dark",
+          description: "Balance in the dark is a sensory experience. Eliminating visual noise forces your nervous system to rely strictly on proprioception and vestibular alignment. The hot environment adds a physiological stressor that demands absolute presence of mind and micro-adjustments in your stabilization chains.",
+          temperature: "102°F / 39°C",
+          humidity: "35% RH",
+          intensity: "Medium-High (Level 3.5/5)",
+          pose: "Eagle Pose & Standing Bow Pulling Sequence"
+        },
+        flexibility: {
+          title: "Deep Elastic Release",
+          subtitle: "Myofascial Decompression",
+          description: "Our far-infrared heat mimics the natural radiation spectrum of the sun, directly warming the deep muscle tissue up to 3 inches deep. This thermal penetration increases the stretch threshold of ligaments, tendons, and joint capsules, allowing safe, deep, and lasting fascial release.",
+          temperature: "104°F / 40°C",
+          humidity: "45% RH",
+          intensity: "Medium (Level 3/5)",
+          pose: "Prone Pigeon & Extended Lizard Pose"
+        }
+      };
+
+      return (
+        <div className="min-h-screen bg-black text-zinc-100 flex flex-col justify-between overflow-x-hidden relative pb-12">
+          {/* Subtle Ambient Glowing Infrared Orbs */}
+          <div className="absolute top-0 left-1/4 w-[30vw] h-[30vw] bg-[#ff3c00] opacity-[0.06] rounded-full blur-[120px] pointer-events-none z-0"></div>
+          <div className="absolute bottom-1/3 right-10 w-[25vw] h-[25vw] bg-[#ff3c00] opacity-[0.04] rounded-full blur-[140px] pointer-events-none z-0"></div>
+
+          {/* Navigation Header */}
+          <header className="border-b border-zinc-900 sticky top-0 bg-black/80 backdrop-blur-md z-50">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+              <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('home')}>
+                <div className="w-9 h-9 border border-zinc-800 rounded-lg flex items-center justify-center bg-zinc-950">
+                  <span className="font-bold text-white text-xs tracking-wider">B</span>
+                </div>
+                <div>
+                  <h1 className="text-sm font-bold tracking-[0.2em] text-white uppercase leading-none">Blackout</h1>
+                  <p className="text-[9px] tracking-[0.3em] text-zinc-500 uppercase mt-1">Hot Yoga</p>
+                </div>
+              </div>
+
+              <nav className="flex space-x-6 text-xs uppercase tracking-widest font-medium">
+                <button onClick={() => setActiveTab('home')} className={`transition-colors ${activeTab === 'home' ? 'text-[#ff3c00]' : 'text-zinc-400 hover:text-white'}`}>Home</button>
+                <button onClick={() => setActiveTab('about')} className={`transition-colors ${activeTab === 'about' ? 'text-[#ff3c00]' : 'text-zinc-400 hover:text-white'}`}>About</button>
+                <button onClick={() => setActiveTab('wellbeing')} className={`transition-colors ${activeTab === 'wellbeing' ? 'text-[#ff3c00]' : 'text-zinc-400 hover:text-white'}`}>Wellbeing</button>
+                <button onClick={() => setActiveTab('contact')} className={`transition-colors ${activeTab === 'contact' ? 'text-[#ff3c00]' : 'text-zinc-400 hover:text-white'}`}>Contact</button>
+              </nav>
+
+              <button onClick={() => setActiveTab('contact')} className="px-4 py-2 border border-[#ff3c00] text-[#ff3c00] rounded text-[11px] uppercase tracking-wider font-semibold hover:bg-[#ff3c00] hover:text-white transition-all">
+                Reserve Pass
+              </button>
+            </div>
+          </header>
+
+          {/* Page Display Routing */}
+          <main className="flex-grow z-10 max-w-7xl mx-auto w-full px-6 mt-8">
+            {activeTab === 'home' && (
+              <div className="space-y-16">
+                {/* Hero Header */}
+                <section className="text-center space-y-6 pt-8">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-zinc-900 border border-zinc-800 rounded-full text-[10px] uppercase tracking-wider text-zinc-400">
+                    <span className="w-1.5 h-1.5 bg-[#ff3c00] rounded-full"></span>
+                    Pure Infrared Radiant Heat Studio
+                  </div>
+                  <h1 className="text-4xl sm:text-6xl font-black tracking-tight uppercase text-white leading-tight">
+                    Strength <span className="text-zinc-700">·</span> Balance <br/>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-[#ff3c00]">Flexibility</span>
+                  </h1>
+                  <p className="max-w-xl mx-auto text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                    An immersive, mirror-free hot yoga layout. Heated natively to deep cellular absorption parameters under cutting-edge far-infrared arrays in absolute sensory darkness.
+                  </p>
+                  <div className="flex justify-center gap-4 pt-2">
+                    <button onClick={() => setActiveTab('wellbeing')} className="px-6 py-3 bg-white text-black text-xs uppercase tracking-widest font-bold rounded hover:bg-zinc-200 transition-colors">Explore Science</button>
+                    <button onClick={() => setActiveTab('contact')} className="px-6 py-3 bg-zinc-900 border border-zinc-800 text-xs uppercase tracking-widest font-bold rounded hover:border-[#ff3c00] transition-colors">Book Intro Class</button>
+                  </div>
+                </section>
+
+                {/* Dashboard Metrics */}
+                <section className="bg-[#09090b] border border-zinc-900 rounded-xl p-6 sm:p-8 max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                  <div><p className="text-[10px] uppercase tracking-widest text-zinc-500">Optimum Temperature</p><p className="text-xl font-bold text-white mt-1">104°F / 40°C</p></div>
+                  <div><p className="text-[10px] uppercase tracking-widest text-zinc-500">Therapeutic Focus</p><p className="text-xl font-bold text-white mt-1">The Triad</p></div>
+                  <div><p className="text-[10px] uppercase tracking-widest text-zinc-500">Ambient Studio Light</p><p className="text-xl font-bold text-white mt-1">Pure Darkness</p></div>
+                  <div><p className="text-[10px] uppercase tracking-widest text-zinc-500">Far Infrared Spec</p><p className="text-xl font-bold text-white mt-1">9.4 Microns</p></div>
+                </section>
+
+                {/* Interative Triad Exploration */}
+                <section className="space-y-6 max-w-4xl mx-auto">
+                  <div className="text-center">
+                    <h2 className="text-lg uppercase tracking-widest font-bold text-white">The Foundational Focus</h2>
+                    <p className="text-xs text-zinc-500 mt-1">Select a core physical parameter to view active studio parameters</p>
+                  </div>
+                  <div className="flex justify-center space-x-2 bg-zinc-950 p-1 rounded-lg border border-zinc-900 max-w-xs mx-auto">
+                    {Object.keys(triadFocus).map((key) => (
+                      <button key={key} onClick={() => setQuizSelection(key)} className={`flex-1 py-2 text-[10px] uppercase tracking-widest font-bold rounded transition-all ${quizSelection === key ? 'bg-zinc-900 text-white border-b-2 border-[#ff3c00]' : 'text-zinc-500'}`}>{key}</button>
+                    ))}
+                  </div>
+                  <div className="bg-[#09090b] border border-zinc-900 rounded-xl p-6 relative overflow-hidden">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
+                        <h3 className="text-base font-bold text-white uppercase tracking-wider">{triadFocus[quizSelection].title}</h3>
+                        <span className="text-[10px] text-[#ff3c00] uppercase font-mono">{triadFocus[quizSelection].subtitle}</span>
+                      </div>
+                      <p className="text-xs text-zinc-400 leading-relaxed font-light">{triadFocus[quizSelection].description}</p>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2 text-[11px]">
+                        <div><span className="text-zinc-500 block">Target Temp:</span><span className="text-white font-mono">{triadFocus[quizSelection].temperature}</span></div>
+                        <div><span className="text-zinc-500 block">Class Intensity:</span><span className="text-[#ff3c00] font-mono">{triadFocus[quizSelection].intensity}</span></div>
+                        <div><span className="text-zinc-500 block">Target Pose Structure:</span><span className="text-white font-mono">{triadFocus[quizSelection].pose}</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {activeTab === 'about' && (
+              <div className="max-w-2xl mx-auto py-12 text-center space-y-6">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-[#ff3c00] font-mono">Sanctuary Blueprint</span>
+                <h2 className="text-2xl font-bold uppercase tracking-widest text-white">The Architecture of Sensory Darkness</h2>
+                <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                  Blackout Hot Yoga was engineered to completely eliminate performative fitness distractions. By quietening the visual cortex via complete environmental darkness, your awareness scales away from competitive aesthetics and targets absolute proprioception.
+                </p>
+                <div className="p-4 bg-[#09090b] border border-zinc-900 rounded-lg text-left text-xs text-zinc-400 space-y-2">
+                  <p><span className="text-white font-bold">1. Zero Mirror Pollution:</span> Forces mapping via your neuro-vestibular metrics rather than your reflection.</p>
+                  <p><span className="text-white font-bold">2. Wavelength Integration:</span> Deep structural heat warms deep ligaments cleanly up to three inches below the skin surface.</p>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'wellbeing' && (
+              <div className="max-w-4xl mx-auto py-8 space-y-10">
+                <div className="text-center space-y-2">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#ff3c00] font-mono">The Science Lab</span>
+                  <h2 className="text-2xl font-bold uppercase text-white tracking-wider">The Clinical Benefits of Far-Infrared Therapy</h2>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  {scientificBenefits.map((benefit, idx) => (
+                    <div key={idx} className="bg-[#09090b] border border-zinc-900 rounded-xl p-6 flex flex-col justify-between space-y-4">
+                      <div className="space-y-2">
+                        <span className="text-[9px] uppercase tracking-widest text-[#ff3c00] bg-[#ff3c00]/10 px-2.5 py-1 rounded font-mono">{benefit.tag}</span>
+                        <h3 className="text-sm font-bold text-white uppercase tracking-wider">{benefit.title}</h3>
+                        <p className="text-xs text-zinc-400 font-light leading-relaxed">{benefit.desc}</p>
+                      </div>
+                      <p className="text-[9px] text-zinc-600 border-t border-zinc-900/50 pt-2 font-mono italic">{benefit.evidence}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-zinc-950 border border-zinc-900 rounded-xl p-4 text-[11px] text-zinc-500 flex gap-2 items-start max-w-2xl mx-auto">
+                  <span><ShieldAlertIcon /></span>
+                  <p>Advisory: Ensure optimal hydration parameters before entering the studio. For practitioners dealing with moderate to severe vascular variations, check with your healthcare team before undergoing extended infrared exposure.</p>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'contact' && (
+              <div className="max-w-md mx-auto py-12">
+                <div className="bg-[#09090b] border border-zinc-900 rounded-2xl p-8 space-y-6">
+                  <div className="text-center">
+                    <h3 className="text-base font-bold uppercase tracking-widest text-white">Request Private Thermal Pass</h3>
+                    <p className="text-[11px] text-zinc-500 mt-1">Fill out your information to schedule your dark-room setup.</p>
+                  </div>
+                  <form onSubmit={handleContactSubmit} className="space-y-4">
+                    <div>
+                      <label className="text-[10px] uppercase tracking-wider text-zinc-400 block mb-1">Your Name</label>
+                      <input type="text" required placeholder="e.g., Alex Carter" className="w-full px-3 py-2.5 bg-black border border-zinc-800 text-zinc-100 rounded text-xs focus:outline-none focus:border-[#ff3c00] transition-colors" />
+                    </div>
+                    <div>
+                      <label className="text-[10px] uppercase tracking-wider text-zinc-400 block mb-1">Email Address</label>
+                      <input type="email" required placeholder="name@domain.com" className="w-full px-3 py-2.5 bg-black border border-zinc-800 text-zinc-100 rounded text-xs focus:outline-none focus:border-[#ff3c00] transition-colors" />
+                    </div>
+                    <button type="submit" className="w-full py-3 bg-[#ff3c00] hover:bg-[#e03500] text-white rounded text-xs uppercase tracking-widest font-bold transition-colors mt-2 shadow-lg shadow-[#ff3c00]/10">
+                      Submit Pass Request
+                    </button>
+                  </form>
+                  {bookingStatus && (
+                    <div className="p-3 bg-[#ff3c00]/10 border border-[#ff3c00]/20 rounded text-center">
+                      <p className="text-xs text-[#ff3c00] font-medium">{bookingStatus}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </main>
+
+          {/* Footer bar */}
+          <footer className="border-t border-zinc-900 bg-black py-6 text-center text-[10px] text-zinc-600 uppercase tracking-widest mt-12 w-full">
+            © 2026 Blackout Hot Yoga. Encapsulated in absolute therapeutic darkness.
+          </footer>
+        </div>
+      );
+    }
+
+    // Mount into HTML layout target
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
 </html>
